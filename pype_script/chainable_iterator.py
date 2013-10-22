@@ -13,7 +13,7 @@ class ChainableIterator(object):
 class FunctionWrapper(ChainableIterator):
     def __init__(self, input_iterator=None):
         super(FunctionWrapper, self).__init__(input_iterator)  
-        self.__wrapped_iterator = None
+        self._wrapped_iterator = None
 
     def __setattr__(self, name, value):
         super(FunctionWrapper, self).__setattr__(name, value)
@@ -22,8 +22,8 @@ class FunctionWrapper(ChainableIterator):
             self._create_iterator()    
 
     def _create_iterator(self):
-        print 'creating iterator: ', self.input_iterator
+        pass
 
     def next():
-        self.__wrapped_iterator.next()
+        self._wrapped_iterator.next()
 
