@@ -24,6 +24,6 @@ class FunctionWrapper(ChainableIterator):
     def _create_iterator(self):
         pass
 
-    def next():
-        self._wrapped_iterator.next()
+    def next(self):
+        return self._wrapped_iterator.next()
 
