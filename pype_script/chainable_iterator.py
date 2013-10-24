@@ -21,7 +21,7 @@ class FunctionWrapper(ChainableIterator):
         if name == 'input_iterator' and value:
             self._create_iterator()    
 
-    def _create_iterator(self):
+    def _create_wrapped_1iterator(self):
         pass
 
     def next(self):
