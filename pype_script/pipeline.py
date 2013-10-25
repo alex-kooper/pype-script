@@ -11,3 +11,5 @@ class Pipeline(object):
     def __iter__(self):
         return iter(self.last_iterable)
 
+iterate = Pipeline
+
