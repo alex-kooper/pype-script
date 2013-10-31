@@ -1,7 +1,5 @@
 from operator import add
-
-from pype_script import iterate
-from pype_script.components import pmap, pfilter, preduce, pmin
+from pype_script import iterate, pmap, pfilter, preduce, pmin
 
 pipeline = (
     iterate(xrange(20)) | pmap(lambda x: x * 3) | pfilter(lambda x: x % 2 == 0) 
