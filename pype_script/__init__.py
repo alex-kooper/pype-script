@@ -14,3 +14,5 @@ from function_wrappers import drop_while
 from function_wrappers import take_while
 from function_wrappers import sort
 
+from dedup import dedup
+
