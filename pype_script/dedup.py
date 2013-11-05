@@ -5,7 +5,7 @@ class dedup(object):
     Removes duplicated values according to the function 'key' that can be passed
     as an argument. If key function not specified, '==' will be used to identify duplicates.
     If there are duplicated values only the first will will be preserved, all the subsequent
-    will be filtered out
+    will be filtered out.
 
     """
 
@@ -34,5 +34,3 @@ class dedup(object):
 
         self.__previous_keys.add(key)
         return el
-
-
