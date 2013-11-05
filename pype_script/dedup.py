@@ -7,6 +7,9 @@ class dedup(object):
         self.key = key
         self.input_iterable = input_iterable
 
+        self.__previous_keys = None
+        self.__input_iterator = None
+
     def __iter__(self):
         self.__previous_keys = set()
         self.__input_iterator = iter(self.input_iterable)
