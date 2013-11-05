@@ -1,5 +1,14 @@
 
 class dedup(object):
+    """ Remove duplicated values 
+
+    Removes duplicated values according to the function 'key' that can be passed
+    as an argument. If key function not specified, '==' will be used to identify duplicates.
+    If there are duplicated values only the first will will be preserved, all the subsequent
+    will be filtered out
+
+    """
+
     def __init__(self, key=None, input_iterable=None):
         if not key:
             key = lambda x: x
