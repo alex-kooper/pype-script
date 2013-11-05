@@ -65,14 +65,52 @@ def pmin(input_iterable=None):
 def pmax(input_iterable=None):
     return preduce(max, None, input_iterable)
 
-#class slice(FunctionWrapper):
-#    def __init__(self, start, stop, step=1, input_iterator=None):
-#       self.start = start
-#       self.stop = stop
-#       self.step = step
-#
-#       super(slice, self).__init__(input_iterator)
-#
-#    def _create_wrapped_iterator(self):
-#        self._wrapped_iterator = itertools.islice(self.input_iterator, self.start, self.stop, self.step)
+class pslice(object):
+    def __init__(self, *args):
+        if len(args) > 3:
+           self.input_iterable = args[3]
+        else:
+           self.input_iterable = None
 
+        s = slice(*args[:3])
+        self.start = s.start
+        self.stop = s.stop
+        self.step = s.step
+
+    def __iter__(self):
+        return itertools.islice(self.input_iterable, self.start, self.stop, self.step)
+
+def take_first(n, input_iterable=None):
+    return pslice(0, n, 1, input_iterable)
+
+def skip_first(n, input_iterable=None):
+    return pslice(n, None, 1, input_iterable)
+
+class drop_while(object):
+    def __init__(self, predicate, input_iterable=None):
+       self.predicate = predicate
+       self.input_iterable = input_iterable
+    
+    def __iter__(self):
+        return itertools.dropwhile(self.predicate, self.input_iterable)
+
+class take_while(object):
+    def __init__(self, predicate, input_iterable=None):
+       self.predicate = predicate
+       self.input_iterable = input_iterable
+    
+    def __iter__(self):
+        return itertools.takewhile(self.predicate, self.input_iterable)
+
+class sort(object):
+    def __init__(self, key=None, reverse=False, input_iterable=None):
+        if not key:
+            key = lambda x: x
+
+        self.key = key
+        self.reverse = reverse
+        self.input_iterable = input_iterable
+
+    def __iter__(self):
+        return iter(sorted(self.input_iterable))
+                                                                        
