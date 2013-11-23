@@ -6,6 +6,7 @@ class dedup(object):
     the stream, it leaves only the first one out of the series of equal 
     elements. If key function is not specified, it will compare objects
     """
+
     def __init__(self, key=None, input_iterable=None):
         if not key:
             key = lambda x: x
@@ -32,5 +33,3 @@ class DedupIterator(object):
 
         self.__previous_keys.add(key)
         return el
-
-
