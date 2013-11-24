@@ -1,3 +1,4 @@
+from iterator import ClosableIterator
 
 class dedup(object):
     """ Remove duplicated elements in the input stream according to key function
@@ -17,7 +18,8 @@ class dedup(object):
     def __iter__(self):
         return DedupIterator(self.key, iter(self.input_iterable))
 
-class DedupIterator(object):
+
+class DedupIterator(ClosableIterator):
     def __init__(self, key, input_iterator):
         self.__key = key
         self.__input_iterator = input_iterator
@@ -33,3 +35,5 @@ class DedupIterator(object):
 
         self.__previous_keys.add(key)
         return el
+
+

@@ -1,5 +1,6 @@
 import itertools
 from operator import add
+from iterator import ClosableIteratorWrapper
 
 class pmap(object):
     def __init__(self, function, input_iterable=None):
@@ -7,7 +8,9 @@ class pmap(object):
        self.input_iterable = input_iterable
 
     def __iter__(self):
-        return itertools.imap(self.function, self.input_iterable)
+        return ClosableIteratorWrapper(
+            itertools.imap(self.function, self.input_iterable)
+        )
 
 class pstar_map(object):
     def __init__(self, function, input_iterable=None):
@@ -15,7 +18,9 @@ class pstar_map(object):
        self.input_iterable = input_iterable
 
     def __iter__(self):
-        return itertools.starmap(self.function, self.input_iterable)
+        return ClosableIteratorWrapper(
+            itertools.starmap(self.function, self.input_iterable)
+        )
 
 class pfilter(object):
     def __init__(self, predicate, input_iterable=None):
@@ -23,7 +28,9 @@ class pfilter(object):
        self.input_iterable = input_iterable
     
     def __iter__(self):
-        return itertools.ifilter(self.predicate, self.input_iterable)
+        return ClosableIteratorWrapper(
+            itertools.ifilter(self.predicate, self.input_iterable)
+        )
 
 class pfilter_false(object):
     def __init__(self, predicate, input_iterable=None):
@@ -31,7 +38,9 @@ class pfilter_false(object):
        self.input_iterable = input_iterable
     
     def __iter__(self):
-        return itertools.ifilterfalse(self.predicate, self.input_iterable)
+        return ClosableIteratorWrapper(
+            itertools.ifilterfalse(self.predicate, self.input_iterable)
+        )
 
 class preduce(object):
     def __init__(self, function, initializer=None, input_iterable=None):
@@ -78,7 +87,9 @@ class pslice(object):
         self.step = s.step
 
     def __iter__(self):
-        return itertools.islice(self.input_iterable, self.start, self.stop, self.step)
+        return ClosableIteratorWrapper(
+            itertools.islice(self.input_iterable, self.start, self.stop, self.step)
+        )
 
 def take_first(n, input_iterable=None):
     return pslice(0, n, 1, input_iterable)
@@ -92,7 +103,9 @@ class drop_while(object):
        self.input_iterable = input_iterable
     
     def __iter__(self):
-        return itertools.dropwhile(self.predicate, self.input_iterable)
+        return ClosableIteratorWrapper(
+            itertools.dropwhile(self.predicate, self.input_iterable)
+        )
 
 class take_while(object):
     def __init__(self, predicate, input_iterable=None):
@@ -100,7 +113,9 @@ class take_while(object):
        self.input_iterable = input_iterable
     
     def __iter__(self):
-        return itertools.takewhile(self.predicate, self.input_iterable)
+        return ClosableIteratorWrapper(
+            itertools.takewhile(self.predicate, self.input_iterable)
+        )
 
 class sort(object):
     def __init__(self, key=None, reverse=False, input_iterable=None):
@@ -112,5 +127,7 @@ class sort(object):
         self.input_iterable = input_iterable
 
     def __iter__(self):
-        return iter(sorted(self.input_iterable))
+        return ClosableIteratorWrapper(
+            iter(sorted(self.input_iterable))
+        )
                                                                         
