@@ -11,6 +11,6 @@ for i in pipeline:
 for i in pipeline | preduce(add):
     print "Sum:     %d" % i
 
-print "Minimum: %d" % (pipeline | pmin()).run()
+print "Minimum: %d" % (pipeline | pmin()).aggregate()
 print "Maximum: %d" % max(pipeline)
  
