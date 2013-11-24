@@ -1,10 +1,10 @@
 
 class dedup(object):
-    """ Remove duplicated elements in the stream according to function key()
+    """ Remove duplicated elements in the input stream according to key function
 
-    If more than one elements that are equal according to function key() are in
-    the stream, it leaves only the first one out of the series of equal 
-    elements. If key function is not specified, it will compare objects
+    If more than one element in the input stream have equal keys it leaves only 
+    the first one, all the subsequent elements will be skipped. If key function 
+    not specified, it will compare elements instead of their keys.
     """
 
     def __init__(self, key=None, input_iterable=None):
