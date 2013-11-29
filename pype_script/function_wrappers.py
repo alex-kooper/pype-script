@@ -4,8 +4,8 @@ from pype_script.iterator import ClosableIteratorWrapper
 
 class pmap(object):
     def __init__(self, function, input_iterable=None):
-       self.function = function
-       self.input_iterable = input_iterable
+        self.function = function
+        self.input_iterable = input_iterable
 
     def __iter__(self):
         return ClosableIteratorWrapper(
@@ -14,8 +14,8 @@ class pmap(object):
 
 class pstar_map(object):
     def __init__(self, function, input_iterable=None):
-       self.function = function
-       self.input_iterable = input_iterable
+        self.function = function
+        self.input_iterable = input_iterable
 
     def __iter__(self):
         return ClosableIteratorWrapper(
@@ -24,9 +24,9 @@ class pstar_map(object):
 
 class pfilter(object):
     def __init__(self, predicate, input_iterable=None):
-       self.predicate = predicate
-       self.input_iterable = input_iterable
-    
+        self.predicate = predicate
+        self.input_iterable = input_iterable
+
     def __iter__(self):
         return ClosableIteratorWrapper(
             itertools.ifilter(self.predicate, self.input_iterable)
@@ -34,9 +34,9 @@ class pfilter(object):
 
 class pfilter_false(object):
     def __init__(self, predicate, input_iterable=None):
-       self.predicate = predicate
-       self.input_iterable = input_iterable
-    
+        self.predicate = predicate
+        self.input_iterable = input_iterable
+
     def __iter__(self):
         return ClosableIteratorWrapper(
             itertools.ifilterfalse(self.predicate, self.input_iterable)
@@ -44,16 +44,16 @@ class pfilter_false(object):
 
 class preduce(object):
     def __init__(self, function, initializer=None, input_iterable=None):
-       self.function = function
-       self.initializer = initializer
-       self.input_iterable = input_iterable
+        self.function = function
+        self.initializer = initializer
+        self.input_iterable = input_iterable
 
-       self.stopped = False
+        self.stopped = False
 
     def __iter__(self):
         self.stopped = False
-        return self     
-    
+        return self
+
     def next(self):
         if(self.stopped):
             raise StopIteration
@@ -77,9 +77,9 @@ def pmax(input_iterable=None):
 class pslice(object):
     def __init__(self, *args):
         if len(args) > 3:
-           self.input_iterable = args[3]
+            self.input_iterable = args[3]
         else:
-           self.input_iterable = None
+            self.input_iterable = None
 
         s = slice(*args[:3])
         self.start = s.start
@@ -88,7 +88,11 @@ class pslice(object):
 
     def __iter__(self):
         return ClosableIteratorWrapper(
-            itertools.islice(self.input_iterable, self.start, self.stop, self.step)
+            itertools.islice(
+                self.input_iterable,
+                self.start,
+                self.stop,
+                self.step)
         )
 
 def take_first(n, input_iterable=None):
@@ -99,9 +103,9 @@ def skip_first(n, input_iterable=None):
 
 class drop_while(object):
     def __init__(self, predicate, input_iterable=None):
-       self.predicate = predicate
-       self.input_iterable = input_iterable
-    
+        self.predicate = predicate
+        self.input_iterable = input_iterable
+
     def __iter__(self):
         return ClosableIteratorWrapper(
             itertools.dropwhile(self.predicate, self.input_iterable)
@@ -109,9 +113,9 @@ class drop_while(object):
 
 class take_while(object):
     def __init__(self, predicate, input_iterable=None):
-       self.predicate = predicate
-       self.input_iterable = input_iterable
-    
+        self.predicate = predicate
+        self.input_iterable = input_iterable
+
     def __iter__(self):
         return ClosableIteratorWrapper(
             itertools.takewhile(self.predicate, self.input_iterable)
@@ -130,4 +134,4 @@ class sort(object):
         return ClosableIteratorWrapper(
             iter(sorted(self.input_iterable))
         )
-                                                                        
+
