@@ -1,6 +1,6 @@
 import itertools
 from operator import add
-from iterator import ClosableIteratorWrapper
+from pype_script.iterator import ClosableIteratorWrapper
 
 class pmap(object):
     def __init__(self, function, input_iterable=None):
