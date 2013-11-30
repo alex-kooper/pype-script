@@ -1,5 +1,3 @@
-#pylint: disable=C0103, R0903
-
 from pype_script.iterator import ClosableIteratorMixin
 
 class dedup(object):

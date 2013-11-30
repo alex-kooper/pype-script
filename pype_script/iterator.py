@@ -1,4 +1,3 @@
-#pylint: disable=R0903
 
 class ClosableIteratorMixin(object):
     def close(self):

@@ -75,8 +75,6 @@ class Pipeline(object):
 
         #pylint: enable=W0612
 
-#Invalid class name
-#pylint: disable=C0103
 
 iterate = Pipeline
 

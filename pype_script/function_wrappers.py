@@ -1,5 +1,3 @@
-#pylint: disable=C0103, R0903
-
 import itertools
 from operator import add
 from pype_script.iterator import ClosableIteratorWrapper

@@ -1,6 +1,21 @@
+"""
+Different implementations of a record that can be used with record based
+read/write components like those that read/write from/to DB, CVS files etc.
+
+All implementations must meet the following requirements:
+  - has a constructor that takes keyword arguments (**kw)
+  - implement method to_dict()
+  - provide access to attributes through __getattr__, __setattr__
+"""
+
 from inspect import ismethod
 
 class Record(dict):
+    """
+    Basic imlementation based on built-in dictionary that adds access to keys
+    using attribute syntax.
+    """
+
     def __getattr__(self, name):
         return self[name]
 
@@ -9,8 +24,16 @@ class Record(dict):
 
     def to_dict(self):
         return self
-        
+
+
 class SlotsRecord(object):
+    """
+    More efficient implementation than Record but requires to define all the
+    attributes using __slots__. It allows to avoid duplication of keys in every
+    record thus improve performance and memory footprint, but only suitable for
+    implementations that have "static" record structure.
+    """
+
     __slots__ = ()
 
     def __init__(self, **kw):
