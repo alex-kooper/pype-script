@@ -1,4 +1,6 @@
-from pype_script.iterator import ClosableIterator
+#pylint: disable=C0103, R0903
+
+from pype_script.iterator import ClosableIteratorMixin
 
 class dedup(object):
     """ Remove duplicated elements in the input stream according to key function
@@ -19,21 +21,21 @@ class dedup(object):
         return DedupIterator(self.key, iter(self.input_iterable))
 
 
-class DedupIterator(ClosableIterator):
+class DedupIterator(ClosableIteratorMixin):
     def __init__(self, key, input_iterator):
         self.__key = key
         self.__input_iterator = input_iterator
         self.__previous_keys = set()
 
     def next(self):
-        el = self.__input_iterator.next()
-        key = self.__key(el)
+        obj = self.__input_iterator.next()
+        key = self.__key(obj)
 
         while key in self.__previous_keys:
-            el = self.__input_iterator.next()
-            key = self.__key(el)
+            obj = self.__input_iterator.next()
+            key = self.__key(obj)
 
         self.__previous_keys.add(key)
-        return el
+        return obj
 
 

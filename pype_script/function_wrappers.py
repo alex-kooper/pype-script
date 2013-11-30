@@ -1,3 +1,5 @@
+#pylint: disable=C0103, R0903
+
 import itertools
 from operator import add
 from pype_script.iterator import ClosableIteratorWrapper
@@ -74,6 +76,8 @@ def pmin(input_iterable=None):
 def pmax(input_iterable=None):
     return preduce(max, None, input_iterable)
 
+#pylint: disable=W0142
+
 class pslice(object):
     def __init__(self, *args):
         if len(args) > 3:
@@ -94,6 +98,8 @@ class pslice(object):
                 self.stop,
                 self.step)
         )
+
+#pylint: enable=W0142
 
 def take_first(n, input_iterable=None):
     return pslice(0, n, 1, input_iterable)

@@ -11,7 +11,7 @@ class Record(dict):
         return self
         
 class SlotsRecord(object):
-     __slots__ = ()
+    __slots__ = ()
 
     def __init__(self, **kw):
         for k, v in kw.iteritems():
