@@ -3,7 +3,7 @@ Select specified subset of columns from a Record
 
 It is supposed to be used in a pipline like that:
 
-    iterable | select_columns('a', 'b', 'c') | iterable ...
+    pipeline_element | select_columns('a', 'b', 'c') | pipeline_element
 """
 
 from pype_script.record.records import Record
