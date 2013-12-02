@@ -125,17 +125,22 @@ class take_while(object):
             itertools.takewhile(self.predicate, self.input_iterable)
         )
 
-class sort(object):
-    def __init__(self, key=None, reverse=False, input_iterable=None):
-        if not key:
-            key = lambda x: x
+#pylint: disable=W0622
 
+class sort(object):
+    def __init__(self, cmp=None, key=None, reverse=False, input_iterable=None):
+        self.cmp = cmp
         self.key = key
         self.reverse = reverse
         self.input_iterable = input_iterable
 
     def __iter__(self):
         return ClosableIteratorWrapper(
-            iter(sorted(self.input_iterable))
+            iter(sorted(self.input_iterable,
+                        cmp=self.cmp,
+                        key=self.key,
+                        reverse=self.reverse))
         )
+
+#pylint: enable=W0622
 
